@@ -24,7 +24,7 @@ class Task < ApplicationRecord
       end
       slug_candidate = slug_count.positive? ? "#{title_slug}-#{slug_count + 1}" : title_slug
       self.slug = slug_candidate
-end
+   end
 
     def slug_not_changed
       if slug_changed? && self.persisted?

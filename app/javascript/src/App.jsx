@@ -6,6 +6,7 @@ import { setAuthHeaders } from "apis/axios";
 import { initializeLogger } from "common/logger";
 import Dashboard from "components/Dashboard";
 import PageLoader from "components/PageLoader";
+import CreateTask from "components/Tasks/CreateTask";
 // previous code if any
 
 const App = () => {
@@ -28,6 +29,7 @@ const App = () => {
   return (
     <Router>
       <Switch>
+        <Route exact path="/tasks/create" component={CreateTask} />
         <Route exact path="/dashboard" component={Dashboard} />
       </Switch>
     </Router>
