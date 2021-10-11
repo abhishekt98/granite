@@ -7,14 +7,21 @@ class TasksController < ApplicationController
   end
 
   def create
-    # puts "printing task => #{task_params}"
     task = Task.new(task_params)
     if task.save
       render status: :ok, json: { notice: t("successfully_created") }
-
     else
       errors = task.errors.full_messages.to_sentence
       render status: :unprocessable_entity, json: { error: errors }
+    end
+  end
+
+  def show
+    task = Task.find_by(slug: params[:slug])
+    if task
+      render status: :ok, json: { task: task }
+    else
+      render status: :not_found, json: { error: t("task.not_found") }
     end
   end
 
