@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
+  before_action :authenticate_user_using_x_auth_token, except: [:new, :edit]
+  before_action :load_task, only: %i[show update destroy]
+
   def index
     tasks = Task.all
     render status: :ok, json: { tasks: tasks }
@@ -17,8 +20,6 @@ class TasksController < ApplicationController
       render status: :unprocessable_entity, json: { error: errors }
     end
   end
-
-  before_action :load_task, only: %i[show update destroy]
 
   def show
     render
