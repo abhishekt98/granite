@@ -22,7 +22,7 @@ class TaskTest < ActiveSupport::TestCase
   end
 
   def test_task_should_not_be_valid_without_user
-    @task.assigned_user = nil
+    @task = Task.new(title: "")
     assert_not @task.save
     assert_includes @task.errors.full_messages, "Assigned user must exist"
   end
