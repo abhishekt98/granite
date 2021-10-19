@@ -7,7 +7,6 @@ class UsersController < ApplicationController
   end
 
   def create
-    puts user_params
     @user = User.new(user_params)
     if @user.save
       render status: :ok, json: { notice: t("successfully_created", entity: "User") }
