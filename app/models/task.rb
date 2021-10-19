@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Task < ApplicationRecord
+  after_create :log_task_details
   RESTRICTED_ATTRIBUTES = %i[title assigned_user_id]
   enum progress: { pending: 0, completed: 1 }
   enum status: { unstarred: 0, starred: 1 }
@@ -47,5 +48,9 @@ class Task < ApplicationRecord
       if slug_changed? && self.persisted?
         errors.add(:slug, t("task.slug.immutable"))
       end
+    end
+
+    def log_task_details
+      TaskLoggerJob.perform_later(self)
     end
 end
