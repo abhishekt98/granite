@@ -26,11 +26,11 @@ class CommentTest < ActiveSupport::TestCase
 
   def test_comment_should_not_be_valid_without_user
     @comment.user = nil
-    assert @comment.invalid?
+    assert @comment.valid?
   end
 
   def test_comment_should_not_be_valid_without_task
     @comment.task = nil
-    assert @comment.invalid?
+    assert @comment.valid?
 end
 end
