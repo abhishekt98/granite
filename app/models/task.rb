@@ -11,6 +11,7 @@ class Task < ApplicationRecord
   validates :title, presence: true, length: { maximum: Constants::MAX_TASK_TITLE_LENGTH }
   validates :slug, uniqueness: true
   validate :slug_not_changed
+  # validates :assigned_user_id, presence: true
 
   before_create :set_slug
 
